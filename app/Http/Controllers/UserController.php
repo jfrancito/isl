@@ -236,6 +236,42 @@ class UserController extends Controller
 	}
 
 
+	public function actionCambiarClave(Request $request)
+	{
+
+		if($_POST)
+		{
+
+			$usuario_id	                    =   $request['usuario_id'];
+			$password	                    =   $request['password'];
+
+
+			$usuario    					= 	User::where('id','=',$usuario_id)->first();
+			$usuario->passwordmobil 		= 	$request['password'];		
+			$usuario->save();
+	
+ 			return Redirect::to('/cambiar-clave')->with('bienhecho', 'clave modificado con exito');
+
+
+		}else{
+
+
+				$usuario    = 	UsuariosIsl::leftJoin('users', 'users.usuarioisl_id', '=', 'usuariosisls.IdUsuariaIsl')
+							 	->where('id','=',Session::get('usuario')->id)->first();
+
+
+		        return View::make('usuario/cambiarclave', 
+		        				[
+		        					'usuario'  => $usuario
+		        				]);
+
+
+		}
+	}
+
+
+
+
 
 	public function actionListarRoles($idopcion)
 	{

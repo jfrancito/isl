@@ -29,6 +29,8 @@ Route::group(['middleware' => ['authaw']], function () {
 	Route::any('/agregar-usuario/{idopcion}', 'UserController@actionAgregarUsuario');
 	Route::any('/modificar-usuario/{idopcion}/{idusuario}', 'UserController@actionModificarUsuario');
 
+	Route::any('/cambiar-clave', 'UserController@actionCambiarClave');
+
 	Route::any('/gestion-de-roles/{idopcion}', 'UserController@actionListarRoles');
 	Route::any('/agregar-rol/{idopcion}', 'UserController@actionAgregarRol');
 	Route::any('/modificar-rol/{idopcion}/{idrol}', 'UserController@actionModificarRol');

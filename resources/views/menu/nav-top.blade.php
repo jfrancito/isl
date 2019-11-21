@@ -14,6 +14,7 @@
                 <div class="user-position online">disponible</div>
               </div>
             </li>
+            <li><a href="{{ url('/cambiar-clave') }}"><span class="icon mdi mdi-key"></span> Cambiar clave</a></li>
             <li><a href="{{ url('/cerrarsession') }}"><span class="icon mdi mdi-power"></span> Cerrar sesión</a></li>
           </ul>
         </li>
