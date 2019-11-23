@@ -102,23 +102,36 @@ class UserController extends Controller
 	    								->orderBy('id', 'asc')
 	    								->get();
 
-	    $idtipoordencompra          = 	'1PK000000003';
-		$listaordencompra_s 		= 	$this->funciones->lista_orden_compra($fecha_menos_siete_dias,$fechafin,$idtipoordencompra);
-		$cantidad_s 				=   0;
-		while ($objeto = $listaordencompra_s->fetch()){
-			$cantidad_s 				=  $cantidad_s  + 1;
-		}
 
-
-
+		$area_id 		= 	'';
 	    $idtipoordencompra          = 	'1PK000000001';
-		$listaordencompra_m 		= 	$this->funciones->lista_orden_compra($fecha_menos_siete_dias,$fechafin,$idtipoordencompra);
+		$listaordencompra_m 		= 	$this->funciones->lista_orden_compra($fecha_menos_siete_dias,$fechafin,$idtipoordencompra,$area_id);
 		$cantidad_m 				=   0;
 		while ($objeto = $listaordencompra_m->fetch()){
 			$cantidad_m 				=  $cantidad_m  + 1;
 		}
 
-		
+
+		/******************* es con area o sin area **********************/
+		$proceso_id 	= 	'1CH000000086';
+		$validartodo 	= 	$this->funciones->listar_todo_o_solo_area($proceso_id);
+
+	    if($validartodo==0){
+	    	$data_ocupacion_trabajador = $this->funciones->data_ocupacion_trabajador();
+	    	if(count($data_ocupacion_trabajador)>0){
+	    		$area_id 		= 	$data_ocupacion_trabajador->IdArea;
+	    	}
+
+	    }
+	    /******************************************************/
+
+	    $idtipoordencompra          = 	'1PK000000003';
+		$listaordencompra_s 		= 	$this->funciones->lista_orden_compra($fecha_menos_siete_dias,$fechafin,$idtipoordencompra,$area_id);
+		$cantidad_s 				=   0;
+		while ($objeto = $listaordencompra_s->fetch()){
+			$cantidad_s 				=  $cantidad_s  + 1;
+		}
+
 
 		return View::make('bienvenido',
 						 [
