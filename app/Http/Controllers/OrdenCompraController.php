@@ -211,11 +211,25 @@ class OrdenCompraController extends Controller
 	    /******************************************************/
 
 
+	    $area_id 		= 	'';
+		/******************* es con area o sin area **********************/
+		$proceso_id 	= 	'1CH000000086';
+		$validartodo 	= 	$this->funciones->listar_todo_o_solo_area($proceso_id);
+
+	    if($validartodo==0){
+	    	$data_ocupacion_trabajador = $this->funciones->data_ocupacion_trabajador();
+	    	if(count($data_ocupacion_trabajador)>0){
+	    		$area_id 		= 	$data_ocupacion_trabajador->IdArea;
+	    	}
+
+	    }
+	    /******************************************************/
+
 
 	    $fecha_menos_siete_dias  	= 	$this->fecha_menos_siete_dias;
 	    $fechafin  					= 	$this->fin;
 	    $idtipoordencompra          = 	'1PK000000003';
-		$listaordencompra 			= 	$this->funciones->lista_orden_compra($fecha_menos_siete_dias,$fechafin,$idtipoordencompra);
+		$listaordencompra 			= 	$this->funciones->lista_orden_compra($fecha_menos_siete_dias,$fechafin,$idtipoordencompra,$area_id);
 		$funcion 					= 	$this;
 
 
@@ -239,8 +253,24 @@ class OrdenCompraController extends Controller
 		$idopcion 				=  $request['idopcion'];
 
 
+	    $area_id 		= 	'';
+		/******************* es con area o sin area **********************/
+		$proceso_id 	= 	'1CH000000086';
+		$validartodo 	= 	$this->funciones->listar_todo_o_solo_area($proceso_id);
+
+	    if($validartodo==0){
+	    	$data_ocupacion_trabajador = $this->funciones->data_ocupacion_trabajador();
+	    	if(count($data_ocupacion_trabajador)>0){
+	    		$area_id 		= 	$data_ocupacion_trabajador->IdArea;
+	    	}
+
+	    }
+	    /******************************************************/
+
+
+
 	    $idtipoordencompra      = 	'1PK000000003';
-		$listaordencompra 		= 	$this->funciones->lista_orden_compra($finicio,$ffin,$idtipoordencompra);
+		$listaordencompra 		= 	$this->funciones->lista_orden_compra($finicio,$ffin,$idtipoordencompra,$area_id);
 		$funcion 				= 	$this;	
 
 		return View::make('ordencompra/ajax/alistaservicios',
@@ -478,11 +508,11 @@ class OrdenCompraController extends Controller
 	    if($validarpermiso <> 'true'){return $validarpermiso;}
 	    /******************************************************/
 
-
+	    $area_id 					= 	'';
 	    $fecha_menos_siete_dias  	= 	$this->fecha_menos_siete_dias;
 	    $fechafin  					= 	$this->fin;
 	    $idtipoordencompra          = 	'1PK000000001';
-		$listaordencompra 			= 	$this->funciones->lista_orden_compra($fecha_menos_siete_dias,$fechafin,$idtipoordencompra);
+		$listaordencompra 			= 	$this->funciones->lista_orden_compra($fecha_menos_siete_dias,$fechafin,$idtipoordencompra,$area_id);
 		$funcion 					= 	$this;
 
 
@@ -507,9 +537,9 @@ class OrdenCompraController extends Controller
 		$ffin 					=  date_format(date_create($request['ffin']), 'd-m-Y');
 		$idopcion 				=  $request['idopcion'];
 
-
+	    $area_id 				= 	'';
 	    $idtipoordencompra      = 	'1PK000000001';
-		$listaordencompra 		= 	$this->funciones->lista_orden_compra($finicio,$ffin,$idtipoordencompra);
+		$listaordencompra 		= 	$this->funciones->lista_orden_compra($finicio,$ffin,$idtipoordencompra,$area_id);
 		$funcion 				= 	$this;	
 
 		return View::make('ordencompra/ajax/alistamateriales',

@@ -2,10 +2,25 @@
 namespace App\Biblioteca;
 use PDO;
 use DB,Hashids,Session,Redirect;
-use App\WEBRolOpcion,App\WEBRol,App\User,App\CMPTipoPago;
+use App\WEBRolOpcion,App\WEBRol,App\User,App\CMPTipoPago,App\PEROcupacionTrabajador;
 
 
 class Funcion{
+
+
+	public function data_ocupacion_trabajador() {
+
+		$ocupaciontrabajador 	= 	PEROcupacionTrabajador::where('IdTrabajador','=',Session::get('usuario')->IdTrabajador)
+									->where('Activo','=',1)
+									->where('Principal','=',1)
+									->first();
+
+		return $ocupaciontrabajador;
+
+	}
+
+
+
 
 	public function data_tipo_pago($id) {
 
@@ -15,6 +30,30 @@ class Funcion{
 
 	}
 
+
+	public function listar_todo_o_solo_area($proceso_id) {
+
+	    $vacio 						=   "";
+	    $tipooperacion 				=   '';
+	    $proceso_id 				=   $proceso_id;//'1CH000000050';//1CH000000025
+	    $sw 						= 	0;
+
+	    /*Lista para seleccionar solititud*/
+		$stmt = DB::connection('sqlsrv')->getPdo()->prepare('SET NOCOUNT ON;EXEC SGD.Isp_TrabajadorSeguridad_Listar ?,?,?');
+        $stmt->bindParam(1, $tipooperacion ,PDO::PARAM_STR);
+        $stmt->bindParam(2, $vacio ,PDO::PARAM_STR);
+        $stmt->bindParam(3, $proceso_id ,PDO::PARAM_STR);
+        $stmt->execute();
+
+		while ($row = $stmt->fetch(2)) {
+			if($row['IdTrabajador'] == Session::get('usuario')->IdTrabajador){
+				$sw 	= 	1;
+			}
+		}
+
+	  	return $sw;
+
+	 }
 
 
 	public function trabajador_seguridad($trabajador_id) {
@@ -193,7 +232,7 @@ class Funcion{
 
 
 
-	public function lista_orden_compra($fechainicio,$fechafin,$idtipoordencompra) {
+	public function lista_orden_compra($fechainicio,$fechafin,$idtipoordencompra,$area_id) {
 
 
 	    $vacio 						=   "";
@@ -227,7 +266,7 @@ class Funcion{
         $stmt->bindParam(13, $vacio ,PDO::PARAM_STR);
         $stmt->bindParam(14, $cero ,PDO::PARAM_STR);
         $stmt->bindParam(15, $cero ,PDO::PARAM_STR);
-        $stmt->bindParam(16, $vacio ,PDO::PARAM_STR);
+        $stmt->bindParam(16, $area_id ,PDO::PARAM_STR);
 
         $stmt->execute();
 
@@ -250,6 +289,7 @@ class Funcion{
         $stmt->bindParam(2, $vacio ,PDO::PARAM_STR);
         $stmt->bindParam(3, $proceso_id ,PDO::PARAM_STR);
         $stmt->execute();
+
 
 		while ($row = $stmt->fetch(2)) {
 			if($row['IdTrabajador'] == Session::get('usuario')->IdTrabajador){
