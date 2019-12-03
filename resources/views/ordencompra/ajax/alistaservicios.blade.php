@@ -11,6 +11,8 @@
         <th>Impuesto</th>
         <th>Total</th>
         <th>Tipo Pago</th>
+        <th>Glosa</th>
+        <th>Usuario Crea</th>
         <th>Estado</th>
 
 
@@ -38,6 +40,8 @@
           <td>
               {{$funcion->funciones->data_tipo_pago($row['IdTipoPago'])->Nombre}}
           </td>
+          <td>{{$row['Glosa']}}</td>
+          <td>{{$row['UsuarioCreacion']}}</td>
           <td>{{$row['EstadoOrden']}}</td>
         </tr>                    
         @endwhile
