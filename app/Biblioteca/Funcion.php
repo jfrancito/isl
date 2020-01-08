@@ -246,7 +246,7 @@ class Funcion{
 	    $opcionfecha 				=   'FO';
 
     	/*Lista para seleccionar solititud*/
-		$stmt = DB::connection('sqlsrv')->getPdo()->prepare('SET NOCOUNT ON;EXEC CMP.Isp_OrdenCompra_Listar ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?');
+		$stmt = DB::connection('sqlsrv')->getPdo()->prepare('SET NOCOUNT ON;EXEC CMP.Isp_OrdenCompra_Listar_web ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?');
 
         $stmt->bindParam(1, $tipooperacion ,PDO::PARAM_STR);
         $stmt->bindParam(2, $vacio ,PDO::PARAM_STR);
