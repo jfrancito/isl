@@ -167,6 +167,24 @@ function alerterrorajax(alert){
 
 }
 
+function alerterrorajaxflotante(alert){
+
+    var aleatorio = Math.floor((Math.random() * 500) + 1);
+    var cadena = '';            
+    cadena += "          <div role='alert' class='rd"+aleatorio+" alertawrelative  alert alert-danger alert-dismissible'>";
+    cadena += "                <button type='button' data-dismiss='alert' aria-label='Close' class='close'>";
+    cadena += "                    <span aria-hidden='true' class='mdi mdi-close'></span>";
+    cadena += "                </button>";
+    cadena += "                <span class='icon mdi mdi-check'></span>";
+    cadena += "                <strong>Error!</strong> "+alert;
+    cadena += "          </div>";
+    $(".panel-ajax-alert-flotante").append(cadena);
+    setTimeout(function(){ $(".rd"+aleatorio).fadeOut(1000).fadeIn(200).fadeOut(600).fadeIn(500).fadeOut(100);}, 2500);
+
+}
+
+
+
 
 function alerterror505ajax(alert){
 
