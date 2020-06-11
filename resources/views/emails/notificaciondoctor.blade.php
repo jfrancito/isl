@@ -57,11 +57,11 @@
                     <tr>
 
                         <td width='188'>
-                            <p class='titulo'><a href="http://10.1.50.2:8080/isl//detalle-encuesta-trabajador/{{$encuesta->trabajador->Dni}}">Ver encuesta si esta dentro del trabajo</a></p>  
+                            <p class='titulo'><a href="http://10.1.50.2:8080/isl//detalle-encuesta-trabajador/{{$encuesta_id}}">Ver encuesta si esta dentro del trabajo</a></p>  
                         </td>
                         
                         <td width='188'>
-                            <p class='titulo'><a href="http://216.244.171.14:8080/isl//detalle-encuesta-trabajador/Hashids::encode(substr($encuesta->id, -8))">Ver encuesta si esta fuera del trabajo</a></p>  
+                            <p class='titulo'><a href="http://216.244.171.14:8080/isl//detalle-encuesta-trabajador/{{$encuesta_id}}">Ver encuesta si esta fuera del trabajo</a></p>  
                         </td>
                     </tr>
                 </table>

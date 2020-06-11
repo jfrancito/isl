@@ -57,9 +57,13 @@ class NotificacionEnfermera extends Command
             $email              =   WEBMaestro::where('codigoatributo','=','0001')->where('codigoestado','=','00003')->first();
 
 
+            $encuesta_id        =   Hashids::encode(substr($item->id, -8));
+
             $array              =   Array(
-                'encuesta'          =>  $item
+                'encuesta'          =>  $item,
+                'encuesta_id'          =>  $encuesta_id
             );
+
 
             Mail::send('emails.notificaciondoctor', $array, function($message) use ($emailfrom,$email,$item)
             {
