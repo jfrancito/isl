@@ -62,6 +62,6 @@ Route::any('/encuesta', 'EncuestaController@actionInicioEncuesta');
 Route::any('/realizar-encuesta/{dni}', 'EncuestaController@actionRealizarEncuesta');
 Route::any('/ajax-guardar-encuesta-trabajador', 'EncuestaController@actionGuardarEncuestaTrabajador');
 Route::any('/termino-encuesta/{dni}', 'EncuestaController@actionTerminoEncuesta');
+Route::any('/lista-encuesta', 'EncuestaController@actionListaEncuesta');
+Route::any('/detalle-encuesta-trabajador/{dni}', 'EncuestaController@actionDetalleEncuestaTrabajador');
 
-/*Route::any('/ajax-listado-de-opciones', 'UserController@actionAjaxListarOpciones');
-Route::any('/ajax-activar-permisos', 'UserController@actionAjaxActivarPermisos');*/

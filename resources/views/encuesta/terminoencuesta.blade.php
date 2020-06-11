@@ -9,7 +9,7 @@
     <link rel="icon" href="{{ asset('public/img/icono/faviind.ico') }}">
 
 
-    <title>ISL</title>
+    <title>ENCUESTA</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/perfect-scrollbar/css/perfect-scrollbar.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/material-design-icons/css/material-design-iconic-font.min.css') }} "/>
 
@@ -28,14 +28,21 @@
     <div class="be-wrapper be-login">
       <div class="be-content">
 		<div class="container" style="margin-top:10px;">
-				<div class='titulo-encuesta col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6 '>
 
+        @if(count($persona)>0)
+				<div class='termino-encuesta col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6'>
 			        	<h4>
 			        		<b>{{$persona->NombreCompleto}}</b><br>
-			        		<small>GRACIAS SE REALIZO EL LLENADO DE LA ENCUESTA CON EXITO</small> 
-			        		
+			        		<p>MUCHAS GRACIAS POR LLENAR EL TAMIZAJE, segun tus resultados nos estaremos comunicando contigo.</p> 
 			        	</h4>
 				</div>
+        @else
+        <div class='termino-encuesta col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6'>
+            <h4>
+              <b>TRABAJADOR NO EXISTE</b><br>
+            </h4>
+        </div>
+        @endif
 		</div> <!--container-->
       </div>
     </div>

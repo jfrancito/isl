@@ -13,6 +13,11 @@ class WEBEncuesta extends Model
     public $incrementing = false;
     public $keyType = 'string';
 
+
+    public function trabajador()
+    {
+        return $this->belongsTo('App\WEBTrabajador', 'persona_id', 'id');
+    }
     
 
 }

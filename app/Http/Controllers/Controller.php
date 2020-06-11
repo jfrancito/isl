@@ -33,7 +33,7 @@ class Controller extends BaseController
 
 		$this->fin 						= date_format(date_create(date('Y-m-d')), 'Y-m-d');
 		$this->fecha_hora 				= date_format(date_create(date('Y-m-d')), 'Y-m-d H:m:s');
-
+		$this->fecha_sin_hora 			= date('d-m-Y');
 	}
 
 

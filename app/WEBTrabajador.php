@@ -14,4 +14,9 @@ class WEBTrabajador extends Model
     public $keyType = 'string';
 
 
+    public function encuesta()
+    {
+        return $this->hasMany('App\WEBEncuesta', 'persona_id', 'id');
+    }
+
 }

@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\NotificacionDoctor;
+use App\Console\Commands\NotificacionEnfermera;
+
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +16,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        NotificacionDoctor::class,
+        NotificacionEnfermera::class
     ];
 
     /**
@@ -24,8 +28,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('notificacion:doctor')->everyMinute(); // CADA MINUTO
+        $schedule->command('notificacion:enfermera')->everyMinute(); // CADA MINUTO
     }
 
     /**

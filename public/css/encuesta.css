@@ -1,4 +1,17 @@
 /******************************* ENCUESTAS ********************************/
+.termino-encuesta{
+    background: #337ab7;
+  color: #fff;
+  padding: 10px 6px;
+  border-radius: 6px;
+  text-align: center;
+}
+.termino-encuesta p{
+  margin-top: 5px;
+  padding: 0px 15px;
+  font-size: 0.9em;
+}
+
 .panel-ajax-alert-flotante{
   position: absolute;
   top: 0px;

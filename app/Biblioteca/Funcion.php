@@ -3,9 +3,42 @@ namespace App\Biblioteca;
 use PDO;
 use DB,Hashids,Session,Redirect;
 use App\WEBRolOpcion,App\WEBRol,App\User,App\CMPTipoPago,App\PEROcupacionTrabajador;
-
+use App\WEBRespuestapersona;
 
 class Funcion{
+
+
+	public function checked_pregunta_0001($encuesta_id,$preguntarespuesta_id) {
+
+
+		$checked 				= 	'';
+		$respuestapersona		= 	WEBRespuestapersona::where('encuesta_id','=',$encuesta_id)
+									->where('preguntarespuesta_id','=',$preguntarespuesta_id)->first();
+
+		if(count($respuestapersona)>0){
+			$checked 				= 	'checked';	
+		}
+
+		return $checked;
+
+	}
+
+
+	public function pregunta_marco_encuesta($preguntarespuesta_id,$encuesta_id) {
+
+
+		$marco 					= 	'0';
+		$respuestapersona 		= 	WEBRespuestapersona::where('preguntarespuesta_id','=',$preguntarespuesta_id)
+									->where('encuesta_id','=',$encuesta_id)
+									->first();
+
+		if(count($respuestapersona)>0){
+			$marco 					= 	'1';
+		}	
+
+		return $marco;
+
+	}
 
 
 	public function data_ocupacion_trabajador() {
@@ -415,6 +448,23 @@ class Funcion{
 		$prefijo = $this->prefijomaestra();
 		$idopcioncompleta = $prefijo.$idopcioncompleta;
 	  	return $idopcioncompleta;
+
+	}
+
+	public function generar_codigo($basedatos,$cantidad) {
+
+	  		// maximo valor de la tabla referente
+			$tabla = DB::table($basedatos)
+            ->select(DB::raw('max(codigo) as codigo'))
+            ->get();
+
+            //conversion a string y suma uno para el siguiente id
+            $idsuma = (int)$tabla[0]->codigo + 1;
+
+		  	//concatenar con ceros
+		  	$correlativocompleta = str_pad($idsuma, $cantidad, "0", STR_PAD_LEFT); 
+
+	  		return $correlativocompleta;
 
 	}
 

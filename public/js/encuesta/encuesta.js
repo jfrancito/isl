@@ -44,7 +44,7 @@ $(document).ready(function(){
 
         if(contador<contadorunico){
             $('html, body').animate({scrollTop:0}, 'slow'); 
-            alerterrorajaxflotante('Complete la Encuesta Preguntas('+listapregunta+')');
+            alerterrorajaxflotante('Complete la encuesta faltan contestar algunas');
             return false;
         }
 
