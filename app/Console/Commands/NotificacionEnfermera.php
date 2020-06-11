@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\WEBMaestro;
 use App\WEBEncuesta;
 use Mail;
+use Hashids;
 
 class NotificacionEnfermera extends Command
 {
