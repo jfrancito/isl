@@ -51,9 +51,13 @@
                         <table id="tablesolicitud" class="table table table-hover table-fw-widget dt-responsive nowrap" style='width: 100%;'>
                           <thead>
                             <tr> 
+                              <th>Encuesta</th>
                               <th>Nombre</th>
+                              <th>Fecha encuesta</th>
+                              <th>Area</th>
                               <th>DNI</th>
-                              <th>Fecha Nacimiento</th>
+                              <th>Doctor</th>
+                              <th>Enfermera</th>                              
                               <th>Opciones</th>
                             </tr>
                           </thead>
@@ -61,9 +65,13 @@
                           <tbody>
                            @foreach($listaencuestas as $item)
                               <tr>
+                                <td>{{$item->codigo}}</td>
                                 <td>{{$item->trabajador->NombreCompleto}}</td>
+                                <td>{{date_format(date_create($item->fecha_crea), 'd-m-Y H:m:s')}}</td>
+                                <td>{{$item->trabajador->area->Nombre}}</td>
                                 <td>{{$item->trabajador->Dni}}</td>
-                                <td>{{date_format(date_create($item->FechaNacimiento), 'd-m-Y')}}</td>
+                                <td>{{$item->cantidad_doctor}}</td>
+                                <td>{{$item->cantidad_enfermera}}</td>                                
                                 <td>
                                   <a href="{{ url('/detalle-encuesta-trabajador/'.Hashids::encode(substr($item->id, -8)))}}"  target="_blank" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
                                 </td>
