@@ -19,4 +19,15 @@ class WEBTrabajador extends Model
         return $this->hasMany('App\WEBEncuesta', 'persona_id', 'id');
     }
 
+    public function cargo()
+    {
+        return $this->belongsTo('App\STDCargo', 'IdCargo', 'id');
+    }
+
+    public function area()
+    {
+        return $this->belongsTo('App\PERArea', 'IdArea', 'id');
+    }
+
+
 }

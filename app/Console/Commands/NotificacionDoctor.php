@@ -7,6 +7,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\WEBMaestro;
 use App\WEBEncuesta;
+use App\WEBRespuestapersona;
+use App\STDTelefono;
 use Mail;
 use Hashids;
 
@@ -56,15 +58,26 @@ class NotificacionDoctor extends Command
             $emailfrom          =   WEBMaestro::where('codigoatributo','=','0001')->where('codigoestado','=','00001')->first();
             // correos principales y  copias
             $email              =   WEBMaestro::where('codigoatributo','=','0001')->where('codigoestado','=','00002')->first();
-
-
             $encuesta_id        =   Hashids::encode(substr($item->id, -8));
 
+            $preguntas          =   WEBRespuestapersona::join('WEB.preguntarespuestas', 'WEB.respuestapersonas.preguntarespuesta_id', '=', 'WEB.preguntarespuestas.id')
+                                    ->join('WEB.preguntas', 'WEB.preguntarespuestas.pregunta_id', '=', 'WEB.preguntas.id')
+                                    ->join('WEB.respuestas', 'WEB.preguntarespuestas.respuesta_id', '=', 'WEB.respuestas.id')
+                                    ->select('WEB.preguntas.*')
+                                    ->where('WEB.respuestapersonas.encuesta_id','=',$item->id)
+                                    ->where('WEB.preguntas.grupo','=','0002')
+                                    ->where('WEB.respuestas.valoracion','=',1)
+                                    ->get();
 
+            $telefonos          =   STDTelefono::where('IdPersonaEmpresa','=',$item->persona_id)
+                                    ->where('Activo','=',1)
+                                    ->get();
 
             $array              =   Array(
-                'encuesta'          =>  $item,
-                'encuesta_id'          =>  $encuesta_id
+                'encuesta'              =>  $item,
+                'encuesta_id'           =>  $encuesta_id,
+                'preguntas'             =>  $preguntas,
+                'telefonos'             =>  $telefonos,
             );
 
             Mail::send('emails.notificaciondoctor', $array, function($message) use ($emailfrom,$email,$item)

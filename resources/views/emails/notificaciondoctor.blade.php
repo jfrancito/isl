@@ -26,7 +26,7 @@
             }
             .titulo a{
                 color: #000000;
-                font-size: 0.8em;
+                font-size: 1em;
             }
             .jefatura{
                 margin-bottom: 6px;
@@ -35,12 +35,53 @@
             .subtitulo{
                 margin-top: 3px;
                 font-weight: bold;
-                font-size: 0.8em;
+                font-size: 1em;
             }
             h1{
                 text-decoration:underline;
                 margin-bottom: 8px;
+                font-size: 15px;
             }
+
+
+            .panelcontainer{
+                width: 50%;
+                background: #fff;
+                margin: 0 auto;
+
+
+            }
+            .panelhead{
+                background: #eb6357;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                color: #fff;
+                text-align: center;
+                font-size: 1.2em;
+            }
+            .panelbody,.panelbodycodigo{
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .panelbodycodigo h3 small{
+                color: #08257C;
+            }
+
+            table, td, th {    
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th, td {
+                padding: 15px;
+                font-size: 14px;
+            }
+
 
         </style>
 
@@ -51,18 +92,54 @@
     <body>
         <section>
             <div class='banner'>
-                <h1>NOTIFICACION DE ENCUESTA</h1>
+                <h1>NOTIFICACION DE ENCUESTA ({{$encuesta->codigo}})</h1>
                 <h3>{{$encuesta->trabajador->NombreCompleto}} presenta sintomas de covid-19</h3>
+                <p>Area : {{$encuesta->trabajador->area->Nombre}}</p>
+                <p>Cargo : {{$encuesta->trabajador->cargo->Nombre}}</p>
+                <p>Telefonos:
+                    @if(count($telefonos)<=0)
+                        No tiene telefonos
+                    @else 
+                        @foreach($telefonos as $index=>$telefono)
+                            {{$telefono->Nombre}}, 
+                        @endforeach
+                    @endif
+                </p>
                 <table  bgcolor="#f6f6f6" >
                     <tr>
 
-                        <td width='188'>
-                            <p class='titulo'><a href="http://10.1.50.2:8080/isl//detalle-encuesta-trabajador/{{$encuesta_id}}">Ver encuesta si esta dentro del trabajo</a></p>  
+                        <td width='700' colspan='2'>
+                            <div class="panelhead">Preguntas que marco (SI)</div>
+                            <div class='panelbody'>
+                                    <table  class="table demo" >
+                                        <tr>
+                                            <th width='350'>
+                                                Pregunta
+                                            </th>
+                                            <th width='350'>
+                                                Respuesta
+                                            </th>
+                                       
+                                        </tr>
+                                        @foreach($preguntas as $index=>$pregunta)
+                                        <tr>
+                                                <td width='350'>{{$pregunta['descripcion']}}</td>
+                                                <td width='350'>SI</td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                            </div>
                         </td>
-                        
-                        <td width='188'>
-                            <p class='titulo'><a href="http://216.244.171.14:8080/isl//detalle-encuesta-trabajador/{{$encuesta_id}}">Ver encuesta si esta fuera del trabajo</a></p>  
+
+                    </tr>
+                    <tr>
+                        <td width='350'>
+                            <p class='titulo'><a href="http://10.1.50.2:8080/isl//detalle-encuesta-trabajador/{{$encuesta_id}}">Ver encuesta (si esta dentro la empresa)</a></p>  
                         </td>
+                        <td width='350'>
+                            <p class='titulo'><a href="http://216.244.171.14:8080/isl//detalle-encuesta-trabajador/{{$encuesta_id}}">Ver encuesta (si esta fuera del trabajo)</a></p>  
+                        </td>
+
                     </tr>
                 </table>
             </div>            
