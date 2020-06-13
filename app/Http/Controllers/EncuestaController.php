@@ -67,10 +67,12 @@ class EncuestaController extends Controller
 	{
 
 		$listaencuestas			=   WEBEncuesta::where('activo','=','1')->get();
+		$funcion 				= 	$this->funciones;
 
 		return View::make('encuesta/listaencuesta',
 						  [
-						   'listaencuestas' 		=> $listaencuestas
+						   'listaencuestas' 		=> $listaencuestas,
+						   'funcion' 		=> $funcion
 						  ]
 						 );
 	}

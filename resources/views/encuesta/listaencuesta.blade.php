@@ -52,10 +52,10 @@
                           <thead>
                             <tr> 
                               <th>Encuesta</th>
-                              <th>Nombre</th>
+                              <th>Nombre y DNI</th>
                               <th>Fecha encuesta</th>
+                              <th>Edad</th>
                               <th>Area</th>
-                              <th>DNI</th>
                               <th>Doctor</th>
                               <th>Enfermera</th>                              
                               <th>Opciones</th>
@@ -66,10 +66,13 @@
                            @foreach($listaencuestas as $item)
                               <tr>
                                 <td>{{$item->codigo}}</td>
-                                <td>{{$item->trabajador->NombreCompleto}}</td>
+                                <td>{{$item->trabajador->NombreCompleto}}<br>
+                                    {{$item->trabajador->Dni}}
+                                </td>
                                 <td>{{date_format(date_create($item->fecha_crea), 'd-m-Y H:m:s')}}</td>
+                                <td>{{$funcion->calculaedad($item->trabajador->FechaNacimiento)}}</td>
                                 <td>{{$item->trabajador->area->Nombre}}</td>
-                                <td>{{$item->trabajador->Dni}}</td>
+
                                 <td>{{$item->cantidad_doctor}}</td>
                                 <td>{{$item->cantidad_enfermera}}</td>                                
                                 <td>

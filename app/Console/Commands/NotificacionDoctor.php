@@ -11,6 +11,7 @@ use App\WEBRespuestapersona;
 use App\STDTelefono;
 use Mail;
 use Hashids;
+use App\Biblioteca\Funcion;
 
 class NotificacionDoctor extends Command
 {
@@ -50,6 +51,7 @@ class NotificacionDoctor extends Command
         $fecha_manana                   =   date("Y-m-d",strtotime($fecha_actual."+ 1 days"));
         $lista_encuesta                 =   WEBEncuesta::where('ind_doctor','=',0)
                                             ->get();
+        $this->funciones                =   new Funcion();
 
 
         foreach($lista_encuesta as $item){
@@ -78,6 +80,7 @@ class NotificacionDoctor extends Command
                 'encuesta_id'           =>  $encuesta_id,
                 'preguntas'             =>  $preguntas,
                 'telefonos'             =>  $telefonos,
+                'funcion'               =>  $this->funciones
             );
 
             Mail::send('emails.notificaciondoctor', $array, function($message) use ($emailfrom,$email,$item)

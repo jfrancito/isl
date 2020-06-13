@@ -94,6 +94,8 @@
             <div class='banner'>
                 <h1>NOTIFICACION DE ENCUESTA ({{$encuesta->codigo}})</h1>
                 <h3>{{$encuesta->trabajador->NombreCompleto}} presenta sintomas de covid-19</h3>
+                
+                <p>Edad : {{$funcion->calculaedad($encuesta->trabajador->FechaNacimiento)}}</p>
                 <p>Area : {{$encuesta->trabajador->area->Nombre}}</p>
                 <p>Cargo : {{$encuesta->trabajador->cargo->Nombre}}</p>
                 <p>Telefonos:
