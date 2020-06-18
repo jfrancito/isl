@@ -27,25 +27,32 @@
   <body class="be-splash-screen containerencuesta">
     <div class="be-wrapper be-login">
       <div class="be-content">
-		<div class="container" style="margin-top:10px;">
+    		<div class="container" style="margin-top:10px;">
 
-        @if(count($persona)>0)
-				<div class='termino-encuesta col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6'>
-			        	<h4>
-			        		<b>{{$persona->NombreCompleto}}</b><br>
-			        		<p>MUCHAS GRACIAS POR LLENAR EL TAMIZAJE, segun tus resultados nos estaremos comunicando contigo.</p> 
-			        	</h4>
-				</div>
-        @else
-        <div class='termino-encuesta col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6'>
-            <h4>
-              <b>TRABAJADOR NO EXISTE</b><br>
-            </h4>
-        </div>
-        @endif
-		</div> <!--container-->
+            @if(count($persona)>0)
+    				<div class='termino-encuesta col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6'>
+    			        	<h4>
+    			        		<b>{{$persona->NombreCompleto}}</b><br>
+    			        		<p>MUCHAS GRACIAS POR LLENAR EL TAMIZAJE, segun tus resultados nos estaremos comunicando contigo.</p> 
+    			        	</h4>
+    				</div>
+            @else
+            <div class='termino-encuesta col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6'>
+                <h4>
+                  <b>TRABAJADOR NO EXISTE</b><br>
+                </h4>
+            </div>
+            @endif
+
+            
+    		</div> <!--container-->
+
+        <div style="text-align: center;margin-top: 20px;"><a href="{{ url('/encuesta') }}" class="btn btn-rounded btn-space btn-success">REALIZAR OTRA ENCUESTA</a></div>
+
       </div>
     </div>
+
+
 
     <script src="{{ asset('public/lib/jquery/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') }}" type="text/javascript"></script>

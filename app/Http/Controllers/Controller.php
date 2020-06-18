@@ -16,6 +16,7 @@ class Controller extends BaseController
 	public $funciones;
 	public $inicio;
 	public $fin;
+	public $fechaactual;
 	public function __construct()
 	{
 	    $this->funciones = new Funcion();
@@ -30,7 +31,7 @@ class Controller extends BaseController
 		$this->fecha_menos_siete_dias 	= date_format(date_create($nuevafecha), 'Y-m-d');
 		$this->inicio 					= date_format(date_create($fecha->format('Y-m-d')), 'Y-m-d');
 
-
+		$this->fechaactual 				= date('d-m-Y H:i:s');
 		$this->fin 						= date_format(date_create(date('Y-m-d')), 'Y-m-d');
 		$this->fecha_hora 				= date_format(date_create(date('Y-m-d')), 'Y-m-d H:m:s');
 		$this->fecha_sin_hora 			= date('d-m-Y');

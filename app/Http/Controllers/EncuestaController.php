@@ -183,7 +183,7 @@ class EncuestaController extends Controller
 		$encuesta->cantidad_doctor 	=  	0;
 		$encuesta->cantidad_enfermera = 0;
 		$encuesta->fecha      		= 	$this->fecha_sin_hora;
-		$encuesta->fecha_crea 		=  	$this->fecha_hora;
+		$encuesta->fecha_crea 		=  	$this->fechaactual;
 		$encuesta->usuario_crea 	=  	$persona_id;
 		$encuesta->save();
 
@@ -200,7 +200,7 @@ class EncuestaController extends Controller
 			$detalle->id 						=  	$idd;
 			$detalle->encuesta_id 				=  	$id;
 			$detalle->preguntarespuesta_id      = 	$separar[0];
-			$detalle->fecha_crea 				=  	$this->fecha_hora;
+			$detalle->fecha_crea 				=  	$this->fechaactual;
 			$detalle->usuario_crea 				=  	$persona_id;
 			$detalle->save();
 
