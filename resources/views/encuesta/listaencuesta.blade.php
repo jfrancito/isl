@@ -71,8 +71,7 @@
                                 </td>
                                 <td>{{date_format(date_create($item->fecha_crea), 'd-m-Y H:m:s')}}</td>
                                 <td>{{$funcion->calculaedad($item->trabajador->FechaNacimiento)}}</td>
-                                <td>{{$item->trabajador->area->Nombre}}</td>
-
+                                <td>{{$item->trabajador->Area}}</td>
                                 <td>{{$item->cantidad_doctor}}</td>
                                 <td>{{$item->cantidad_enfermera}}</td>                                
                                 <td>

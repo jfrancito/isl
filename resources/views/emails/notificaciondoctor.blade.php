@@ -96,16 +96,9 @@
                 <h3>{{$encuesta->trabajador->NombreCompleto}} presenta sintomas de covid-19</h3>
                 
                 <p>Edad : {{$funcion->calculaedad($encuesta->trabajador->FechaNacimiento)}}</p>
-                <p>Area : {{$encuesta->trabajador->area->Nombre}}</p>
-                <p>Cargo : {{$encuesta->trabajador->cargo->Nombre}}</p>
-                <p>Telefonos:
-                    @if(count($telefonos)<=0)
-                        No tiene telefonos
-                    @else 
-                        @foreach($telefonos as $index=>$telefono)
-                            {{$telefono->Nombre}}, 
-                        @endforeach
-                    @endif
+                <p>Area : {{$encuesta->trabajador->Area}}</p>
+                <p>Cargo : {{$encuesta->trabajador->Cargo}}</p>
+                <p>Telefonos: {{$encuesta->trabajador->Telefono}}
                 </p>
                 <table  bgcolor="#f6f6f6" >
                     <tr>
