@@ -65,3 +65,5 @@ Route::any('/termino-encuesta/{dni}', 'EncuestaController@actionTerminoEncuesta'
 Route::any('/lista-encuesta', 'EncuestaController@actionListaEncuesta');
 Route::any('/detalle-encuesta-trabajador/{dni}', 'EncuestaController@actionDetalleEncuestaTrabajador');
 
+Route::any('/tamizaje-del-dia', 'EncuestaController@actionTamizajeDiario');
+

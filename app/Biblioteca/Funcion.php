@@ -4,6 +4,7 @@ use PDO;
 use DB,Hashids,Session,Redirect;
 use App\WEBRolOpcion,App\WEBRol,App\User,App\CMPTipoPago,App\PEROcupacionTrabajador;
 use App\WEBRespuestapersona;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Funcion{
 
@@ -478,6 +479,42 @@ class Funcion{
 	  		return $correlativocompleta;
 
 	}
+
+
+	public function encuesta_trabajadores_tamizaje_dia($fecha) {
+
+		$lista_trabajadores = DB::select("select web.trabajadores.NombreCompleto,web.trabajadores.Dni,web.trabajadores.FechaNacimiento,web.trabajadores.Area,web.trabajadores.Cargo,web.trabajadores.Telefono,web.trabajadores.Empresa,
+		count(WEB.encuestas.codigo) as cantidad_encuesta,
+		(CASE
+		    WHEN max(WEB.encuestas.ind_enfermera)>0 THEN 'SI'
+		    ELSE 'NO'
+		 END) AS notificacion_enfermera ,
+		 (CASE
+		    WHEN max(WEB.encuestas.ind_doctor)>0 THEN 'SI'
+		    ELSE 'NO'
+		 END) AS notificacion_doctor 
+
+		from  web.trabajadores
+		left join WEB.encuestas on WEB.encuestas.persona_id = web.trabajadores.id 
+		and WEB.encuestas.fecha = ?
+		group by web.trabajadores.NombreCompleto,web.trabajadores.Dni,web.trabajadores.FechaNacimiento,
+		web.trabajadores.Area,web.trabajadores.Cargo,web.trabajadores.Telefono,web.trabajadores.Empresa
+		order by count(WEB.encuestas.codigo) desc", [$fecha]);
+
+        $titulo                         =   'Tamizaje'.$fecha;
+
+	    Excel::create($titulo, function($excel) use ($lista_trabajadores) {
+
+	        $excel->sheet('tamizaje', function($sheet) use ($lista_trabajadores) {
+	            $sheet->loadView('encuesta/excel/listatamizaje')->with('lista_trabajadores',$lista_trabajadores);	                             		 
+	        });
+	    })->store('xls');
+
+	}
+
+
+
+
 
 
 }

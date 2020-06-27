@@ -4,6 +4,8 @@ namespace App\Console;
 
 use App\Console\Commands\NotificacionDoctor;
 use App\Console\Commands\NotificacionEnfermera;
+use App\Console\Commands\NotificacionTamizajeFinalDia;
+
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -17,7 +19,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         NotificacionDoctor::class,
-        NotificacionEnfermera::class
+        NotificacionEnfermera::class,
+        NotificacionTamizajeFinalDia::class
     ];
 
     /**
@@ -30,6 +33,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('notificacion:doctor')->everyMinute(); // CADA MINUTO
         $schedule->command('notificacion:enfermera')->everyMinute(); // CADA MINUTO
+        $schedule->command('notificacion:tamizajefinal')->dailyAt('10:00');
     }
 
     /**

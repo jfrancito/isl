@@ -14,6 +14,7 @@ use App\PERPersona;
 use App\WEBTrabajador;
 use App\WEBEncuesta;
 use App\WEBRespuestapersona;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class EncuestaController extends Controller
@@ -93,6 +94,7 @@ class EncuestaController extends Controller
 			/**********************************************************/
 			
 			$dni 	 				 		= 	strtoupper($request['dni']);
+
 			$persona						=   WEBTrabajador::where('activo','=','1')->where('Dni','=',$dni)->first();
 
 			if(count($persona)>0)
@@ -242,6 +244,12 @@ class EncuestaController extends Controller
 						   'persona' 		=> $persona
 						  ]
 						 );
+	}
+
+	public function actionTamizajeDiario()
+	{
+		$this->funciones->encuesta_trabajadores_tamizaje_dia($this->fecha_menos_uno);
+
 	}
 
 
