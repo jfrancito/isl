@@ -43,8 +43,7 @@ class Controller extends BaseController
 		$this->fecha_hora 				= date_format(date_create(date('Y-m-d')), 'Y-m-d H:m:s');
 		$this->fecha_sin_hora 			= date('d-m-Y');
 
-		$this->fecha_menos_uno 			= date_format(date_create($nuevafechauno), 'Y-m-d');
-
+		$this->fecha_menos_uno 			= date_format(date_create(date('Y-m-d')), 'Y-m-d');
 	}
 
 

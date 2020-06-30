@@ -53,6 +53,7 @@ class NotificacionTamizajeFinalDia extends Command
         $nuevafechauno      = strtotime ( '-1 day' , strtotime($fechasuno));
         $nuevafechauno      = date ('Y-m-j' , $nuevafechauno);
         $fecha_menos_uno    = date_format(date_create($nuevafechauno), 'Y-m-d');
+        $fecha_menos_uno    = date_format(date_create(date('Y-m-d')), 'Y-m-d');
 
             // correos from(de)
         $emailfrom          =   WEBMaestro::where('codigoatributo','=','0001')->where('codigoestado','=','00001')->first();
